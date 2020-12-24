@@ -1,7 +1,7 @@
 graphql
 =======
 
-[![Build Status](https://travis-ci.org/shurcooL/graphql.svg?branch=master)](https://travis-ci.org/shurcooL/graphql) [![GoDoc](https://godoc.org/github.com/shurcooL/graphql?status.svg)](https://godoc.org/github.com/shurcooL/graphql)
+![CI](https://github.com/sc0Vu/graphql/workflows/Go/badge.svg) [![GoDoc](https://godoc.org/github.com/sc0vu/graphql?status.svg)](https://godoc.org/github.com/sc0vu/graphql)
 
 Package `graphql` provides a GraphQL client implementation.
 
