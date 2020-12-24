@@ -243,6 +243,7 @@ func TestUnmarshalGraphQL_pointerWithInlineFragment(t *testing.T) {
 
 func TestUnmarshalGraphQL_unexportedField(t *testing.T) {
 	type query struct {
+		//lint:ignore U1000 Ignore unused code
 		foo graphql.String
 	}
 	err := jsonutil.UnmarshalGraphQL([]byte(`{"foo": "bar"}`), new(query))
