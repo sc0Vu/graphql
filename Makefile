@@ -2,7 +2,7 @@ TESTS= $(shell go list ./...)
 GOPATH= $(shell go env GOPATH)
 
 .PHONY: default
-default: lint seccheck test
+default: lint seccheck test clean
 
 .PHONY: test
 test:
@@ -22,5 +22,5 @@ seccheck:
 
 .PHONY: clean
 clean:
-	-rm $(BINS)
 	go clean -cache ./...
+	go mod tidy
