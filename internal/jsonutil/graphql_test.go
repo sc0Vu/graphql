@@ -4,8 +4,9 @@ import (
 	"reflect"
 	"testing"
 	"time"
+	"math/big"
 
-	"github.com/shurcooL/graphql"
+	"github.com/sc0Vu/graphql"
 	"github.com/sc0Vu/graphql/internal/jsonutil"
 )
 
@@ -37,6 +38,41 @@ func TestUnmarshalGraphQL(t *testing.T) {
 	var want query
 	want.Me.Name = "Luke Skywalker"
 	want.Me.Height = 1.72
+	if !reflect.DeepEqual(got, want) {
+		t.Error("not equal")
+	}
+}
+
+func TestUnmarshalGraphQLBigInt(t *testing.T) {
+	/*
+		query {
+			me {
+				name
+				height
+			}
+		}
+	*/
+	type query struct {
+		Me struct {
+			Name   graphql.String
+			Height graphql.BigInt
+		}
+	}
+	var got query
+	err := jsonutil.UnmarshalGraphQL([]byte(`{
+		"me": {
+			"name": "Peter Skywalker",
+			"height": "183"
+		}
+	}`), &got)
+	if err != nil {
+		t.Fatal(err)
+	}
+	var want query
+	want.Me.Name = "Peter Skywalker"
+	want.Me.Height = graphql.BigInt{
+		Int: big.NewInt(183),
+	}
 	if !reflect.DeepEqual(got, want) {
 		t.Error("not equal")
 	}

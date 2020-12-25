@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/shurcooL/graphql"
+	"github.com/sc0Vu/graphql"
 	"github.com/sc0Vu/graphql/internal/jsonutil"
 )
 

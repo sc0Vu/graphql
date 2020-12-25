@@ -1,5 +1,10 @@
 package graphql
 
+import (
+	"math/big"
+	"encoding/json"
+)
+
 // Note: These custom types are meant to be used in queries for now.
 // But the plan is to switch to using native Go types (string, int, bool, time.Time, etc.).
 // See https://github.com/shurcooL/githubv4/issues/9 for details.
@@ -49,3 +54,28 @@ func NewInt(v Int) *Int { return &v }
 
 // NewString is a helper to make a new *String.
 func NewString(v String) *String { return &v }
+
+// BigInt represents big integer.
+type BigInt struct {
+	Int *big.Int
+}
+
+// MarshalJSON
+func (bi *BigInt) MarshalJSON() (d []byte, err error) {
+	s := bi.Int.String()
+	d, err = json.Marshal(s)
+	return
+}
+
+// UnmarshalJSON
+func (bi *BigInt) UnmarshalJSON(data []byte) (err error) {
+	var s String
+	err = json.Unmarshal(data, &s)
+	if err != nil {
+		return
+	}
+	b := &big.Int{}
+	b.SetString(string(s), 10)
+	bi.Int = b
+	return nil
+}
