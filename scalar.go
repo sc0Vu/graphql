@@ -74,7 +74,7 @@ func (bi *BigInt) UnmarshalJSON(data []byte) (err error) {
 	if err != nil {
 		return
 	}
-	b := &big.Int{}
+	b := new(big.Int)
 	b.SetString(string(s), 10)
 	bi.Int = b
 	return nil
